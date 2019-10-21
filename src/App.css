@@ -30,3 +30,11 @@
   text-align: center;
 }
 
+.imgNav{
+  display: block;
+}
+
+.next {
+  float: right;
+}
+
