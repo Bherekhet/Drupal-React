@@ -1,0 +1,32 @@
+.home {
+  background: #ecf0f1;
+}
+
+.mainContent {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.card {
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.recipeDetail {
+  margin: 0 auto;
+  margin: 5%;
+}
+
+.detail{
+  margin-top: 2.2em;
+}
+
+.recipeTitle {
+  font-size: 1.5em;
+  text-align: center;
+}
+
