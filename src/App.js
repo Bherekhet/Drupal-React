@@ -1,78 +1,57 @@
 import React from 'react';
 import './App.css';
-import {LoremIpsum} from "lorem-ipsum";
-// lorem.generateWords(1);
-//lorem.generateSentences(5);
-//lorem.generateParagraphs(7);
+import lorem from './shared/Lorem-ipsum';
+import Footer from './shared/Footer';
+import Menu from './shared/Menu';
 
-const url = "http://gtest.dev.wwbtc.com/json/rec";
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 8,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 16,
-    min: 4
-  }
-})
-
-// const list = [
-//   {
-//     objectID: 0,
-//     recipeName: "Doro Wat",
-//     description: "Made only for certain occations",
-//     url: "https://amboethiopiancuisine.files.wordpress.com/2011/06/013011-035.jpg?w=1800&h=720&crop=1)",
-//     detail: lorem.generateSentences(5),
-//     need: lorem.generateWords(3)
-//   },
-//   {
-//     objectID: 1,
-//     recipeName: "Shiro",
-//     description: "Daily blessed feast",
-//     url: "https://www.wassethiopianrestaurant.com/images/10-promo-slides/Shiro-Wat.jpg",
-//     detail: lorem.generateSentences(5),
-//     need: lorem.generateWords(3)  
-//   }
-// ]
-
-
+// function Control(){
+//   fetch("http://gtest.dev.wwbtc.com/json/rec/").then(response=> 
+//      // console.log('res'+response.json());
+//       response.json())
+//     .then(data => {
+//       return data;
+//     }).catch(err => {
+//       this.console.log(err);
+//     })
+// }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {recipeList: [], }
+    
+    this.fetchRecipe = this.fetchRecipe.bind(this);
+  }
+
+  fetchRecipe(){
+    fetch("http://gtest.dev.wwbtc.com/json/rec/").then(response=> {
+      return response.json();
+    }).then(data => {
+      this.setState({recipeList: data});
+    }).catch(err => {
+      this.console.log(err);
+    })
+  }
+
+  componentWillMount(){
+    this.fetchRecipe();
+  }
+
   render(){
+    const {recipeList} = this.state;
+    //console.log(recipeList);
+    if (!recipeList){
+      this.fetchRecipe();
+    }
+
     return(
       <div className="container">
         <Menu />
-        <Home />
+        <Home list={recipeList} />
         <Footer />
       </div>
     );
   }
-}
-function Menu (){
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/home">Recipe Magazine</a>
-        <div className="navbar-collapse" id="navbarNav">
-          <ul className="nav navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="/home">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="./recipes">Recipes</a>
-            </li>
-          </ul>
-        </div>
-    </nav>
-  )
-}
-
-function Footer() {
-  return(
-    <div className="footer-copyright text-center bg-light py-3">© 2019 Copyright:
-      <a href="https://github.com/Bherekhet"> Bereket Degefa</a>
-    </div>
-  )
 }
 
 class Home extends React.Component {
@@ -80,13 +59,10 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      list:null,
-      clicked: false,
-      id:'',
-      data: []
+      clicked: false
     };
+
     this.onRecipeClick = this.onRecipeClick.bind(this);
-    // this.listOfRecipes = this.listOfRecipes.bind(this);
   }
 
   onRecipeClick(id){
@@ -95,26 +71,14 @@ class Home extends React.Component {
       id: id,
     });
   }
-
-  componentDidMount(){
-    fetch("http://gtest.dev.wwbtc.com/json/rec/").then(response=> {
-      //console.log(response);
-      return response.json();
-    }).then(data => {
-      this.setState({list: data})
-      console.log(data);
-    }).catch(err => {
-      console.log("Error Reading data "+ err);
-    })
-
-  }
-    
+  
   render(){
-
-    const {list, clicked} = this.state;
-    if (!list) {
+    const {clicked} = this.state;
+    const list = this.props.list;
+    if (!list){
       return null;
     }
+
     if (clicked){
       return <Recipe recipeID={this.state.id} recipeList={list}/>
     } 
@@ -123,32 +87,32 @@ class Home extends React.Component {
         <div className="mainContent">
           {lorem.generateParagraphs(3)}
         </div>
-          { list.map((item, key) => 
-            <div className="card" key={key}>
-              {console.log(item.view_node)}
-              <a href="#" onClick={() => this.onRecipeClick(item.objectID)}>
-              <img className="card-img-top" src={item.field_images} alt={item.title}/>
+          { list.map((item, index) => 
+          <div className="grid">
+             <div className="card" key={index}>
+              {console.log('http://gtest.dev.wwbtc.com'+item.field_images)}
+
+              <a href="#" onClick={() => this.onRecipeClick(item.nodeID)}>
+              <img className="card-img-top imgSize" src={'http://gtest.dev.wwbtc.com'+item.field_images} alt={item.title}/>
               </a>
               <div className="card-body">
                 <h5 className="card-title">{item.title}</h5>
-                <p className="card-text">{item.body}</p>
+                <p className="card-text">{item.field_summary}</p>
               </div>
             </div>
-            )}
+          </div>
+          )}
       </div>
     );
   }
 }
 
 class Recipe extends React.Component {
-
   render(){
-    console.log(this.props.recipeID);
-    console.log(this.props.recipeList);
     return(
       <div>
           <p className="recipeTitle">Doro Wat</p>
-          <div className="card" style={{width: '18rem'}}>
+          <div className="card">
             <img className="rounded mx-auto d-block" style={{width: '80%'}} 
               src="https://amboethiopiancuisine.files.wordpress.com/2011/06/013011-035.jpg?w=1800&h=720&crop=1)">
               </img>
