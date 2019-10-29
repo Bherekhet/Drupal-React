@@ -1,19 +1,33 @@
 import React from 'react';
+import Home from '../components/home/home';
+import Recipe from '../components/recipe/recipe';
 
-function Menu (){
+//travisCi.mount
+
+function Menu ({list}){
+  const pointToHome = () => {
+    return <Home list={list}/>
+  }
+  const pointToRecipes = (list) => {
+    return <Recipe list={list}/>
+  }
+
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/home">Recipe Magazine</a>
-          <div className="navbar-collapse" id="navbarNav">
-            <ul className="nav navbar-nav">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a className="navbar-brand" href="#/home">Recipe Magazine</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+          {/* <div className="collapse navbar-collapse" id="collapsibleNavbar"> */}
+            <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="/home" >Home</a>
+                <a className="nav-link" href="#home" onClick={() => pointToHome} >Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/recipes">Recipes</a>
+                <a className="nav-link" href="#recipes" onClick={() => pointToRecipes(list)}>Recipes</a>
               </li>
             </ul>
-          </div>
+          {/* </div> */}
       </nav>
     )
   }

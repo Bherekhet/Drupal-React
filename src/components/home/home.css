@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Dancing+Script|Roboto|Shadows+Into+Light&display=swap');
+
+.recipes {
+    font-family: 'Roboto', cursive;
+   
+}
+
+.grid {
+    width: 50%;
+    height: 40%;
+    margin: 0 auto;
+    margin-bottom: 5%;
+    overflow: auto;
+    font-size: 1.2em;
+    background: #F4F6F6;
+}
+.rec-iden {
+    margin-top: 20px;
+    text-align: center;
+}
+.rec-title {
+    margin-bottom: 5px;
+}
+
+.rec-bottom div:nth-child(1) {
+}
+
+.rec-bottom div:nth-child(2) {
+}
+
+.rec-float {
+    float: left;
+    padding: 4%;
+    width: 33.33%;
+    height: 250px;
+}
+.rec-float .last-2-comments {
+    font-size: .6em;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.rec-images {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+}
+rec-images:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
