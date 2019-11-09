@@ -1,8 +1,6 @@
 import React from 'react';
-import lorem from '../../shared/Lorem-ipsum';
 import Recipe from '../recipe/recipe';
 import './home.css';
-
 
 
 class Home extends React.Component {
@@ -10,57 +8,46 @@ class Home extends React.Component {
       super(props);
   
       this.state = {
-        clicked: false,
+        recipeClicked: false,
         node: null
       };
   
       this.onRecipeClick = this.onRecipeClick.bind(this);
     }
   
-    onRecipeClick(id, node){
+    onRecipeClick(e, node){
+      e.preventDefault();
       this.setState({
-        clicked: true,
-        id: id,
-        node: node,
+        recipeClicked: true,
+        node: node
       });
     }
     
     render(){
-      const {clicked, node} = this.state;
-      const list = this.props.list;
+      const {recipeClicked, node} = this.state;
+      const recipeData = this.props.recipeData;
       
-      if (!list){
-        return null;
-      }
-  
-      if (clicked){
-        return <Recipe recipeID={this.state.node} recipeList={list}/>
+      if (recipeClicked){
+        console.log(recipeData);
+        return <Recipe recipeID={node} recipeData={recipeData}/>
       } 
       return( 
-        <div className="recipes">
-            { list.map((item, index) => 
-            <div key={item.view_node} className="grid">
-              <div className="rec-iden">
-                <span><p className="rec-title">{item.title}</p></span>
-                <span><p className="rec-summary">{item.field_summary}</p></span>
-              </div>
-              <div className="rec-bottom">
-                <div className="rec-float">
-                  <h4 className="last-2-comments">
-                    <h5>last comment: {lorem.generateWords(3)} </h5>
-                  </h4>
-                  <h4 className="last-2-comments">
-                  <h5>last comment: {lorem.generateWords(3)} </h5>
-                  </h4>
-                </div>
-                <div className="rec-float">
-                  <a href="#" onClick={() => this.onRecipeClick(item.nodeid, index)}>
-                    <img className="rec-images" src={'http://gtest.dev.wwbtc.com'+item.field_images} alt={item.title}/>
+        <div className="main">
+          <p className="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div className="contain">
+              { recipeData.map((item, index) => 
+              <div key={item.view_node} className="card">
+                <div className="card-content">
+                  <span><p className="title">{item.title}</p></span>
+                  <span><p>{item.field_summary}</p></span>
+                  <a href={item.title} onClick={(e) => this.onRecipeClick(e, index)}>
+                    <img src={'http://gtest.dev.wwbtc.com'+item.field_images} alt={item.title}/>
                   </a>
                 </div>
+                
               </div>
-            </div>
-            )}
+              )}
+          </div>
         </div>
       );
     }

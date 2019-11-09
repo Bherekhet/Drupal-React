@@ -3,5 +3,12 @@
 }
 
 .footer {
+    background: #543864;
     color: white;
+    clear: both;
+    width: 100%;
+}
+
+.footer a {
+    color: grey;
 }
