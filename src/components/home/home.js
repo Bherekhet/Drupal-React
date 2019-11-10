@@ -1,6 +1,6 @@
 import React from 'react';
-import Recipe from '../recipe/recipe';
-import './home.css';
+import Recipe from '../recipe/Recipe';
+import './Home.css';
 
 
 class Home extends React.Component {

@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
-import Footer from '../../shared/footer';
-import Nav from '../../shared/menu';
-import Home from '../home/home'
+import Footer from '../../shared/Footer';
+import Menu from '../../shared/Menu';
+import Home from '../home/Home'
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {recipeData: [] }
-    
     this.fetchRecipe = this.fetchRecipe.bind(this);
   }
 
@@ -31,7 +30,7 @@ class App extends React.Component {
     const {recipeData} = this.state;
     return(
       <div>
-        <Nav/>
+        <Menu/>
         <Home recipeData={recipeData}/>
         <Footer />
       </div> 

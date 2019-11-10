@@ -1,5 +1,5 @@
 import React from 'react';
-import './recipe.css';
+import './Recipe.css';
 
 class Recipe extends React.Component {
     constructor(props) {
@@ -13,7 +13,6 @@ class Recipe extends React.Component {
 
     decideNextRecipe(recipes, current, button){
       if (button === 0){
-        console.log(this.state.node);
         this.setState({recipeID: ((current-1 === -1) ? recipes-1 : current-1)});
       }else{
         this.setState({recipeID: ((current+1 === recipes) ? 0 : current+1)}, () => {

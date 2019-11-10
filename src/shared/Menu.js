@@ -1,9 +1,9 @@
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import '../components/home/home.css';
+import '../components/home/Home.css';
 //travisCi.mount
 
-function Menu (){
+export default function Menu (){
     return (
       <nav id="navColor" className="navbar navbar-expand-md navbar-dark ">
         <a className="navbar-brand" href="#/home">Recipe Magazine</a>
@@ -23,5 +23,3 @@ function Menu (){
       </nav>
     )
   }
-
-export default Menu;
