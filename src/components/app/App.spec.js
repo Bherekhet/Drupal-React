@@ -3,25 +3,7 @@ import renderer from 'react-test-renderer';
 import {mount} from 'enzyme';
 import App from './App.js';
 import Menu from '../../shared/Menu.js'
-
-var data = [
-  {
-    body:"this is a body",
-    field_images:"image section",
-    field_ingredients:"1 2 3 4",
-    field_summary:"summary section",
-    title:"title section",
-    node:"0"
-  },
-  {
-    body:"this is a body",
-    field_images:"image section",
-    field_ingredients:"5 4 3 2",
-    field_summary:"summary section",
-    title:"title section",
-    node:"2"
-  }
-]
+/*eslint import/no-unresolved: [2, { caseSensitive: true (default) | false }]*/
 
 describe('App component', () => {
   
