@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {mount} from 'enzyme';
-import App from './app';
-import Menu from '../../shared/Menu'
+import App from './App.js';
+import Menu from '../../shared/Menu.js'
 
 var data = [
   {

@@ -1,8 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Home from './Home';
-import {mount} from 'enzyme';
-import Recipe from '../recipe/Recipe';
+import Home from './Home.js';
 
 var data = [
     {

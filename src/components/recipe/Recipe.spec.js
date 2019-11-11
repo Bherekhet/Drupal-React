@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Recipe from './Recipe';
+import Recipe from './Recipe.js';
 import {mount} from 'enzyme';
 
 var data = [
