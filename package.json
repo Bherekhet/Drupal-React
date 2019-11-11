@@ -13,6 +13,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "test:watch": "npm run test -- --watch",
     "eject": "react-scripts eject"
   },
@@ -32,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "coveralls": "^3.0.7",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "react-test-renderer": "^16.11.0"
