@@ -12,10 +12,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "eject": "react-scripts eject",
     "test": "react-scripts test",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "test:watch": "npm run test -- --watch",
-    "eject": "react-scripts eject"
+    "test:cypress": "start-server-and-test start http://localhost:3000 cypress",
+    "cypress": "cypress run"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,8 +36,10 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.7",
+    "cypress": "^3.6.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "react-test-renderer": "^16.11.0"
+    "react-test-renderer": "^16.11.0",
+    "start-server-and-test": "^1.10.6"
   }
 }
