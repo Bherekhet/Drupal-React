@@ -1,28 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from '../../components/home/Home.js';
-var data = [
-  {
-    body:"this is a",
-    field_images:"image section",
-    field_ingredients:"1 2 3 4",
-    field_summary:"summary section",
-    title:"title section",
-    node:"0"
-  },
-  {
-    body:"this is a body",
-    field_images:"image section",
-    field_ingredients:"5 4 3 2",
-    field_summary:"summary section",
-    title:"title section",
-    node:"2"
-  }
-]
+// import {shallow} from 'enzyme';
+import {hom, rec} from '../../../testMockData.js';
+// import App from './App';
 
+// import { JestEnvironment } from '@jest/environment';
+// import { wrap } from 'module';
+
+//renders app component without crashing 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Home recipeData={data}/>, div);
+  ReactDOM.render(<Home homePage={hom} recipeData={rec}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+// describe('App Component', () => {
+//   it ('fetches data from server', done => {
+//     const mockSuccessResponse = {};
+//     const mockJsonPromise = Promise.resolve(mockSuccessResponse);
+//     const mockFetchPromise = Promise.resolve({
+//       json: () => mockJsonPromise,
+//     });
+//     jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
+
+//     const wrapper = shallow(<App/>);
+//     expect(global.fetch).toHaveBeenCalledTimes(2);
+//     expect(global.fetch).toHaveBeenCalledWith(process.env.REACT_APP_API_BASE+process.env.REACT_APP_API_RECIPE_ENDPOINT);
+
+//     process.nextTick(() => {
+//       expect(wrapper.state()).toEqual({
+
+//       });
+
+//       global.fetch.mockClear();
+//       done();
+//     })
+//   })
+// })
 

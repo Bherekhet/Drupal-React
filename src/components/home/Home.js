@@ -1,22 +1,24 @@
 import React from 'react';
+import {Route, Switch, Link } from 'react-router-dom'
 import Recipe from '../recipe/Recipe.js';
 import './Home.css';
 
+// this component load the home page of the react app
+// it will include an intro section and gives a snapshot view of recipes fetched
 
 class Home extends React.Component {
     constructor(props){
       super(props);
-  
       this.state = {
-        recipeClicked: false,
+        c: false,
         node: null
       };
   
       this.onRecipeClick = this.onRecipeClick.bind(this);
     }
-  
-    onRecipeClick(e, node){
-      e.preventDefault();
+
+    //function gets called when a recipe picture is clicked, updates 'recipeClicked' state 
+    onRecipeClick(node){
       this.setState({
         recipeClicked: true,
         node: node
@@ -25,26 +27,37 @@ class Home extends React.Component {
     
     render(){
       const {recipeClicked, node} = this.state;
-      const recipeData = this.props.recipeData;
+      const {recipeData, homePage} = this.props;
       
       if (recipeClicked){
-        console.log(recipeData);
-        return <Recipe recipeID={node} recipeData={recipeData}/>
-      } 
+        return <Recipe recipeID={node} recipeData={recipeData}/> 
+      }
+
       return( 
         <div className="main">
-          <p className="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          {/* if homepage info is fetched, it gets rendered */}
+          {homePage.length > 0 && 
+            <p className="intro" dangerouslySetInnerHTML={{__html: homePage[0].body}}></p>
+          }
+          {/* if homepage info is not found, displays message below */}
+          {homePage.length === 0 && 
+          <p className="intro" >{"Oops no data found for homepage on content manager"}</p>}
+           
           <div className="contain">
+              {recipeData.length === 0 && 
+                <p>{"Oops no data found for recipes on content manager"}</p>
+              }
               { recipeData.map((item, index) => 
-              <div key={item.view_node} className="card">
-                <div className="card-content">
+              <div  className="card">
+                <div key={item.view_node} className="card-content">
                   <span><p className="title">{item.title}</p></span>
                   <span><p>{item.field_summary}</p></span>
-                  <a href={item.title} onClick={(e) => this.onRecipeClick(e, index)}>
-                    <img src={'http://gtest.dev.wwbtc.com'+item.field_images} alt={item.title}/>
+                  {/* <a href={item.title} onClick={(e) => this.onRecipeClick(e, index)}> */}
+                  <a href="#" onClick={() => this.onRecipeClick(index)}>
+                    {/* only the first of the w2 images feteched will be displayed */}
+                    <img src={process.env.REACT_APP_API_BASE+(item.field_images.slice(0, item.field_images.indexOf(',')))} alt={item.title}/>
                   </a>
                 </div>
-                
               </div>
               )}
           </div>

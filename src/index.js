@@ -1,10 +1,13 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import App from './components/app/App';
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default ReactDOM.render( 
+    <App />, 
+    document.getElementById('root'));
 
 if (module.hot) {
     module.hot.accept()

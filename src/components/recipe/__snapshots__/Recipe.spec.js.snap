@@ -25,18 +25,18 @@ exports[`Recipe component snapshot renders 1`] = `
   <div
     className="buttons"
   >
-    <a
+    <button
       className="prev"
       onClick={[Function]}
     >
       ❮
-    </a>
-    <a
+    </button>
+    <button
       className="next"
       onClick={[Function]}
     >
       ❯
-    </a>
+    </button>
   </div>
   <div
     className="rec-detail"

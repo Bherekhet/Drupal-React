@@ -1,16 +1,19 @@
 import React from 'react';
 import './Recipe.css';
+import '../home/Home'
 
+//this component loads information about a single recipe when a recipe is clicked form home page
 class Recipe extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         recipeID: this.props.recipeID
       }
-
       this.decideNextRecipe = this.decideNextRecipe.bind(this);
     }
 
+    //function to display a recipe for when next/previous button selected
+    //takes 3 parameters, recipes=number of recipes, current=current recipe on display, button=next or previous button selected
     decideNextRecipe(recipes, current, button){
       if (button === 0){
         this.setState({recipeID: ((current-1 === -1) ? recipes-1 : current-1)});
@@ -19,22 +22,26 @@ class Recipe extends React.Component {
         });
       }
     }
-    
+  
     render(){
       const {recipeData} = this.props;
       const {recipeID} = this.state;
-      var ingredeints = (recipeData[recipeID].field_ingredients).split(",");
+      
+      if (recipeData.length === 0) {
+        return null;
+      }
+      const ingredeints = (recipeData[recipeID].field_ingredients).split(",");
 
       return(
         <div className="recipe">
           <div className="rec-top">
             <div className="recipe-title">{recipeData[recipeID].title}</div>
             <img className="rounded mx-auto d-block" style={{width: '80%'}} 
-                src={'http://gtest.dev.wwbtc.com'+recipeData[recipeID].field_images}></img>
+                src={'http://gtest.dev.wwbtc.com'+recipeData[recipeID].field_images} alt={recipeData.title}></img>
           </div>
           <div className="buttons">
-            <a className="prev" onClick={(e) => this.decideNextRecipe(recipeData.length, recipeID, 0)}>&#10094;</a>
-            <a className="next" onClick={(e) => this.decideNextRecipe(recipeData.length, recipeID, 1)}>&#10095;</a>
+            <button className="prev" onClick={() => this.decideNextRecipe(recipeData.length, recipeID, 0)}>&#10094;</button>
+            <button className="next" onClick={() => this.decideNextRecipe(recipeData.length, recipeID, 1)}>&#10095;</button>
           </div>
           <div className="rec-detail">
             <p dangerouslySetInnerHTML={{__html: recipeData[recipeID].body}}></p>
@@ -49,6 +56,5 @@ class Recipe extends React.Component {
       )
     }
   }
-
 
 export default Recipe;  
